@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Peixonautas · NASA Space Apps 2026</title>
+  <meta name="description" content="Visor de capacete para o astronauta em Marte, com o relevo real da Cratera Gale." />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+           background: radial-gradient(1200px 600px at 70% -10%, #3a1d14 0%, #0d1117 60%); color: #e6edf3; min-height: 100vh; }
+    main { max-width: 880px; margin: 0 auto; padding: 56px 20px 40px; }
+    h1 { font-size: clamp(2rem, 6vw, 3.2rem); margin: 0 0 8px; letter-spacing: -.02em; }
+    .lead { color: #b6c2cf; font-size: 1.1rem; line-height: 1.55; max-width: 62ch; }
+    .grid { display: grid; gap: 16px; margin: 36px 0; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    a.card { display: block; padding: 20px; border: 1px solid #30363d; border-radius: 14px; background: #161b22cc;
+             color: inherit; text-decoration: none; transition: border-color .15s, transform .15s; }
+    a.card:hover, a.card:focus-visible { border-color: #e0733a; transform: translateY(-2px); outline: none; }
+    .card h2 { margin: 0 0 6px; font-size: 1.15rem; }
+    .card p { margin: 0; color: #9aa7b4; font-size: .95rem; line-height: 1.45; }
+    .tag { display: inline-block; margin-bottom: 10px; padding: 2px 8px; border-radius: 999px; background: #e0733a22; color: #f0a070; font-size: .75rem; }
+    .note { color: #9aa7b4; font-size: .9rem; line-height: 1.5; }
+    footer { margin-top: 40px; color: #7d8a97; font-size: .85rem; }
+    footer a { color: #f0a070; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>🐟🚀 Peixonautas</h1>
+  <p class="lead">Um visor de capacete para o astronauta em Marte, com o relevo real da Cratera Gale,
+    região explorada pelo rover Curiosity. Projeto da equipe Peixonautas no NASA Space Apps Challenge 2026.</p>
+
+  <div class="grid">
+    <a class="card" href="apps/ar-vr/">
+      <span class="tag">Melhor no celular</span>
+      <h2>Visão VR</h2>
+      <p>Ande pelo terreno marciano em escala 1:1, com rota no chão e mapas 2D e 3D flutuantes.
+         Use na horizontal e toque em Entrar.</p>
+    </a>
+    <a class="card" href="apps/map-2d/">
+      <span class="tag">Planejamento</span>
+      <h2>Mapa 2D</h2>
+      <p>Planejador de rota sobre o terreno de Gale, com dados de relevo e traversabilidade.</p>
+    </a>
+    <a class="card" href="apps/map-3d/">
+      <span class="tag">Relevo</span>
+      <h2>Mapa 3D</h2>
+      <p>Globo de Marte com relevo MOLA e camadas de imagem da NASA.</p>
+    </a>
+  </div>
+
+  <p class="note">Dica: a Visão VR carrega o relevo e as imagens direto dos servidores da NASA, então a primeira
+    abertura pode demorar alguns segundos. O mapa 3D baixa cerca de 35 MB de relevo.</p>
+
+  <footer>
+    Código-fonte no <a href="https://github.com/mbessoni/peixonautas-space-apps-2026">GitHub</a> · Licença MIT
+  </footer>
+</main>
+</body>
+</html>
