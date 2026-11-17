@@ -1,0 +1,61 @@
+name: Publicar no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: apps/ar-vr/package-lock.json
+
+      - name: Build da Visão VR (Vite, caminhos relativos)
+        working-directory: apps/ar-vr
+        run: |
+          npm ci
+          npm run build -- --base=./
+
+      - name: Montar o site
+        run: |
+          mkdir -p _site/apps _site/data
+          cp site/index.html _site/index.html
+          touch _site/.nojekyll
+          # Visão VR (build do Vite)
+          cp -r apps/ar-vr/dist _site/apps/ar-vr
+          # Mapas estáticos: mantêm a estrutura do repo porque o mapa 2D usa ../../packages e ../../data
+          cp -r apps/map-2d _site/apps/map-2d
+          cp -r apps/map-3d _site/apps/map-3d
+          cp -r packages _site/packages
+          cp -r data/gale _site/data/gale
+          rm -rf _site/apps/map-2d/tests _site/apps/map-3d/tests _site/packages/shared/navigation/tests
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
